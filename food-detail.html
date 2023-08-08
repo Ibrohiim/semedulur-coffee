@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Semedulur Coffee - Food Details</title>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+
+  </header>
+
+  <main id="main">
+
+    <!-- ======= Menu Detail Section ======= -->
+    <section id="menu-detail" class="menu-detail">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-8 entries" id="food-details">
+
+            <!-- Disini akan menampilkan data dari makanan -->
+
+            <div class="reviews" id="reviews">
+              <h4 class="reviews-count" id="reviews-count"></h4>
+              
+              <div class="review-form" id="review-form">
+                <h4>Leave a Review</h4>
+                <p>Your email address will not be published. Required fields are marked * </p>
+                <form method="post">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <input name="name" id="name" type="text" class="form-control" placeholder="Your Name*">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <input name="email" id="email" type="text" class="form-control" placeholder="Your Email*">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <input name="subject" id="subject" value="" type="text" class="form-control" placeholder="Subject" readonly>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <textarea name="message" id="message" class="form-control" placeholder="Your Message*"></textarea>
+                    </div>
+                  </div>
+                  <button type="button" onclick="sendMail()" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="sidebar">
+              <h3 class="sidebar-title">Most Popular Foods</h3>
+              <div class="sidebar-item recent-menu" id="most-popular-food">
+                <!-- Disini akan menampilkan data dari makanan populer -->
+              </div>
+
+              <h3 class="sidebar-title">Recent Foods</h3>
+              <div class="sidebar-item recent-menu" id="recent-food">
+                <!-- Disini akan menampilkan data dari makanan terbaru -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+    <div class="footer-top">
+      <div class="container">
+          <div class="footer-info text-center">
+            <h3>Semedulur Coffee</h3>
+            <nav id="navbar" class="navbar justify-content-center">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="foods.html">Food</a></li>
+                <li><a href="drinks.html">Drink</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+              <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <div class="social-links mt-1">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <!-- Data Food JS File -->
+  <script src="assets/js/data/food.js"></script>
+  <!-- Data Review JS File -->
+  <script src="assets/js/data/reviewsFood.js"></script>
+
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function(){
+        emailjs.init("P1V_MBc_DTnSsHG7j");
+    })();
+  </script>
+  <script>
+    var foodDetails = document.getElementById("food-details");
+    var reviews = document.getElementById("reviews");
+    var reviewForm = document.getElementById("review-form");
+    var reviewsCount = document.getElementById("reviews-count");
+    var subject = document.getElementById('subject');
+
+    // Ambil parameter ID food dari URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var foodId = urlParams.get("id");
+
+    // Cari food dengan ID yang sesuai dalam data
+    var selectedFood = foodData.find(function(food) {
+      return food.id == foodId;
+    });
+
+    var selectedReviews = reviewFoodData.filter(function(review) {
+      return review.food_id ==foodId;
+    });
+
+    if (selectedFood) {
+      var detailFood = document.createElement("article");
+      detailFood.className = "entry entry-single";
+      detailFood.innerHTML = `
+          <div class="entry-img">
+            <img src="assets/img/foods/${selectedFood.image}" alt="${selectedFood.name}" class="img-fluid" style="min-width: 736px;max-height: 440px;">
+          </div>
+          <h2 class="entry-title">
+            <a href="#">${selectedFood.name}</a>
+            <p class="price">${selectedFood.price}</p>
+          </h2>
+          <div class="entry-content">
+            <p>${selectedFood.description}</p>
+          </div>
+      `;
+
+      foodDetails.insertBefore(detailFood, reviews);
+
+      // Value Subject Review Makanan
+      subject.value = `Review Makanan : ${selectedFood.name}`;
+    } else {
+      foodDetails.innerHTML = "<p>Food not found.</p>";
+    }
+
+    if (selectedReviews) {
+      selectedReviews.forEach(function(review) {
+      var reviewsData = document.createElement("div");
+      reviewsData.className = "review";
+      reviewsData.innerHTML = `
+        <div class="d-flex">
+          <div class="review-img"><img src="assets/img/reviews/${review.profile}" alt=""></div>
+          <div>
+            <h5><a href="#">${review.reviewer_name}</a></h5>
+            <time datetime="">${review.date}</time>
+            <p>
+              ${review.message}
+            </p>
+          </div>
+        </div>
+      `;
+
+      reviews.insertBefore(reviewsData, reviewForm);
+      });
+
+      reviewsCount.textContent = `${selectedReviews.length} Reviews`;
+    }
+  </script>
+  <script>
+    var popularFoodList = document.getElementById("most-popular-food");
+
+    // ID data yang ingin ditampilkan sebagai populer, maksimal 3 Id
+    var selectedId = [1, 3, 6];
+  
+    // Filter data berdasarkan ID yang dipilih
+    var selectedFoods = foodData.filter(function(food) {
+      return selectedId.includes(food.id);
+    });
+
+    // Loop untuk menampilkan data yang dipilih
+    selectedFoods.forEach(function(food) {
+      popularFoodList.innerHTML += `
+      <div class="menu-item clearfix">
+        <img src="assets/img/foods/${food.image}" alt="">
+        <h4><a href="food-detail.html?id=${food.id}">${food.name}</a></h4>
+        <p class="price">${food.price}</p>
+      </div>
+        `;
+    });
+  </script>
+  <script>
+    var recentFoodList = document.getElementById("recent-food");
+
+    // ID data yang ingin ditampilkan sebagai recent food, maksimal 3 Id
+    var selectedId = [3, 4, 5];
+  
+    // Filter data berdasarkan ID yang dipilih
+    var selectedFoods = foodData.filter(function(food) {
+      return selectedId.includes(food.id);
+    });
+
+    // Loop untuk menampilkan data yang dipilih
+    selectedFoods.forEach(function(food) {
+      recentFoodList.innerHTML += `
+      <div class="menu-item clearfix">
+        <img src="assets/img/foods/${food.image}" alt="">
+        <h4><a href="food-detail.html?id=${food.id}">${food.name}</a></h4>
+        <p class="price">${food.price}</p>
+      </div>
+        `;
+    });
+  </script>
+</body>
+
+</html>

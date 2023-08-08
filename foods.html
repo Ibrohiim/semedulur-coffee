@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Semedulur Coffee - Food List</title>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+
+  </header>
+
+  <!-- ======= Hero No Slider Section ======= -->
+  <section id="hero-no-slider" class="d-flex justify-cntent-center align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+        <div class="col-xl-8">
+        <h2>Nama Best Seller Brand Makanan</h2>
+        <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+        <a href="foods.html" class="btn-get-started ">Read More</a>
+        </div>
+    </div>
+    </div>
+</section><!-- End Hero No Slider Sectio -->
+
+  <main id="main">
+
+    <!-- ======= Menu List Section ======= -->
+    <section class="menu-list pt-0">
+      <div class="container">
+
+        <div class="row menu-list-container" id="food-list" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+    <div class="footer-top">
+      <div class="container">
+          <div class="footer-info text-center">
+            <h3>Semedulur Coffee</h3>
+            <nav id="navbar" class="navbar justify-content-center">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="foods.html">Food</a></li>
+                <li><a href="drinks.html">Drink</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+              <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <div class="social-links mt-1">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <!-- Data Food JS File -->
+  <script src="assets/js/data/food.js"></script>
+
+  <script>
+  
+    var menuList = document.getElementById("food-list");
+  
+    // Loop through the foodData array and create HTML elements for each food
+    for (var i = 0; i < foodData.length; i++) {
+      var foods = foodData[i];
+      var description = foods.description
+      var shortenedDescription = description.substring(0, 100);
+      
+      if (description.length > 100) {
+        shortenedDescription += '...';
+      }
+  
+      var food = document.createElement("div");
+      food.className = "col-lg-3 col-md-6 menu-list-wrap";
+      food.innerHTML = `
+        <div class="card">
+          <div class="card-img">
+            <img src="assets/img/foods/${foods.image}" alt="${foods.name}">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><a href="#" class="food-detail-link" data-id="${foods.id}">${foods.name}</a></h5>
+            <p class="card-text">${shortenedDescription}</p>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-8">
+                <div class="price">${foods.price}</div>
+              </div>
+              <div class="col-4 text-end">
+                <div class="read-more"><a href="food-detail.html?id=${foods.id}"><i class="bi bi-arrow-right"></i></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+  
+      menuList.appendChild(food);
+    }
+  </script>
+
+</body>
+
+</html>
