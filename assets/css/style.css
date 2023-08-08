@@ -251,17 +251,17 @@ h6,
 
 .navbar-mobile .mobile-nav-toggle {
   position: absolute;
-  top: 15px;
+  top: 30px;
   right: 15px;
 }
 
 .navbar-mobile ul {
   display: block;
   position: absolute;
-  top: 55px;
+  top: 70px;
   right: 15px;
-  bottom: 15px;
-  left: 15px;
+  bottom: 30%;
+  left: 50%;
   padding: 10px 0;
   background-color: #fff;
   overflow-y: auto;
