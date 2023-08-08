@@ -277,5 +277,8 @@ function loadFooter() {
     .catch((error) => console.error("Error loading footer:", error));
 }
 
-// Memanggil fungsi loadHeader saat dokumen selesai dimuat
-document.addEventListener("DOMContentLoaded", loadHeader, loadFooter);
+// Memanggil fungsi loadHeader dan loadFooter saat dokumen selesai dimuat
+document.addEventListener("DOMContentLoaded", function() {
+  loadHeader();
+  loadFooter();
+});
